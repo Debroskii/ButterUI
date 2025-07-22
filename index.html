@@ -4,15 +4,24 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Sketch</title>
+    <title>ButterUI</title>
 
     <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=close" />
 
     <script src="libraries/p5.min.js"></script>
     <script src="libraries/p5.sound.min.js"></script>
-    <script src="ui/core/draggable.js"></script>
-    <script src="ui/core/element.js"></script>
-    <script src="ui/core/slider.js"></script>
+    <script src="ui/core/scene.js"></script>
+    <script src="util/atomic_boolean.js"></script>
+    <script src="ui/input/keybind_registrar.js"></script>
+    <script src="config.js"></script>
+    <script src="ui/core/component/panel.js"></script>
+    <script src="ui/core/scene_flavors/core_ui_scene.js"></script>
+    <script src="ui/core/scene_flavors/panel_scene.js"></script>
+    <script src="ui/core/component/reusable.js"></script>
+    <script src="util/dom_utils.js"></script>
+    <script src="ui/core/background/background.js"></script>
+    <script src="ui/core/background/flavors/dot_grid_background.js"></script>
   </head>
 
   <body>

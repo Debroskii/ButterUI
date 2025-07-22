@@ -1,0 +1,2 @@
+const TARGET_FRAME_RATE = 60;
+const BACKGROUND_COLOR = '#000000';
