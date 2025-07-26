@@ -30,7 +30,7 @@ class PanelScene extends CoreScene {
             for(let panel of this.panels) {
                 let nextPosition = this.findNextPosition();
                 panel.setPosition(nextPosition.x, nextPosition.y);
-                populatePanelMap();
+                this.populatePanelMap();
             }
         }, 10)
     }
@@ -46,13 +46,15 @@ class PanelScene extends CoreScene {
     }
 
     isPanel(x, y) {
+        let isPosPanel = false;
         for(let panel of this.panels) {
-            return x >= panel.position.x && x <= panel.position.x + convertVwX(panel.dimensions.x) && y >= panel.position.y && y <= panel.position.y + convertVwX(panel.dimensions.y);
+            if(x >= panel.position.x && x <= panel.position.x + convertVwX(panel.dimensions.x) && y >= panel.position.y && y <= panel.position.y + convertVwX(panel.dimensions.y)) isPosPanel = true;
         }
-        return false;
+        return isPosPanel;
     }
 
     findNextPosition() {
+        this.populatePanelMap();
         for(let y = 2; y < this.panelMap[0].length; y++) {
             for(let x = 1; x < this.panelMap.length; x++) {
                 if(!this.panelMap[x][y]) {
