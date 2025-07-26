@@ -1,5 +1,6 @@
-let testPanelScene;
+let SCENE;
 let organizeKeybind;
+let reg;
 
 function preload() {}
 
@@ -10,22 +11,45 @@ function windowResized() {
 function setup() {
   frameRate(TARGET_FRAME_RATE);
   createCanvas(windowWidth, windowHeight);
-  testPanelScene = new PanelScene("ButterUI Panels", new DotGridBackground(), true);
-  testPanelScene.addPanel(new Panel(createVector(0, 20), createVector(convertPxX(200), convertPxX(200))));
-  testPanelScene.addPanel(new Panel(createVector(40, 20), createVector(convertPxX(200), convertPxX(200))));
-  organizeKeybind = KeybindRegistry.register(new AtomicBoolean(() => keyIsDown(79), () => {}, () => {testPanelScene.smartOrganize()}))
+
+  Preferences.getInstance().withCheckbox("test-checkbox", true, "Test Checkbox", true)
+
+  AppTheme.setTheme(new Theme()
+    .backgroundColor(color(0))
+    .textColor(color(255))
+    .secondaryTextColor(color(205))
+    .surfaceColor(color(255, 30))
+    .primaryColor(color(255, 55, 55))
+    .borderColor(color(255, 105))
+    .borderWidth(0.05)
+    .positiveColor(color(55, 205, 105))
+  )
+
+  AppTheme.setup();
+
+  reg = new Registry("Test Registry")
+    .withSlider("test", 0, "Test Color", true, {min: -100, max: 100, step: 1})
+    .withCheckbox("test2", true, "Test Checkbox", true)
+    .withTextField("test3", "placeholder", "Test Text Field", true)
+    .withNumberField('test4', 0, "Test Number Field", true)
+    .withColor("test5", color(255, 0, 0), "Test Color Picker", true)
+
+  ContextMenu.init();
+  EventHandler.setup();
+  SCENE = new PanelScene("Test Scene", new DotGridBackground(), true)
 }
 
 function draw() {
   background(BACKGROUND_COLOR);
+  Preferences.getInstance().update()
   KeybindRegistry.update();
   SceneRegistry.update(deltaTime / 1000);
   SceneRegistry.draw();
-  testPanelScene.showPanelMap();
 }
 
 function mousePressed() {
   SceneRegistry.handleInput(SceneInputType.MOUSE_PRESSED);
+  ContextMenu.testMousePressedForClosed();
 }
 
 function mouseReleased() {
