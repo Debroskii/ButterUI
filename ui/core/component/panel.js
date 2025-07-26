@@ -14,7 +14,6 @@ class Panel {
 
     constructDOM() {
         const dom = {
-            shadow: createDiv('').addClass('panel-snapping-shadow').hide(),
             root: createDiv('').id(`panel-${this.id}`).addClass('panel'),
             titleBar: create_PANEL_TITLEBAR(this.title, true, () => this.dispose()),
             content: this.content
@@ -25,11 +24,6 @@ class Panel {
         dom.root.style('width', `${this.dimensions.x}vw`);
         dom.root.style('height', `${this.dimensions.y}vw`);
 
-        dom.shadow.style('top', `${convertPxY(this.position.y)}vw`);
-        dom.shadow.style('left', `${convertPxX(this.position.x)}vw`);
-        dom.shadow.style('width', `${this.dimensions.x}vw`);
-        dom.shadow.style('height', `${this.dimensions.y}vw`);
-
         dom.root.child(dom.titleBar);
         dom.root.child(dom.content);
 
@@ -37,8 +31,8 @@ class Panel {
         dom.root.mouseReleased(() => {
             this.dragging = false;
             if(this.snappingInfo.snapping) {
-                const snapX = Math.round(this.position.x / this.snappingInfo.background.spacing) * this.snappingInfo.background.spacing;
-                const snapY = Math.round(this.position.y / this.snappingInfo.background.spacing) * this.snappingInfo.background.spacing;
+                const snapX = constrain(Math.round(this.position.x / this.snappingInfo.background.spacing) * this.snappingInfo.background.spacing, 0, windowWidth - convertVwX(this.dimensions.x));
+                const snapY = constrain(Math.round(this.position.y / this.snappingInfo.background.spacing) * this.snappingInfo.background.spacing, convertVwX(2), windowHeight - convertVwX(this.dimensions.y));
                 this.position.set(snapX, snapY);
                 this.DOMReferences.root.style('top', `${convertPxX(snapY)}vw`);
                 this.DOMReferences.root.style('left', `${convertPxX(snapX)}vw`);
@@ -60,7 +54,7 @@ class Panel {
         return this;
     }
 
-    dispose(list = [this]) {
+    dispose(list = SCENE.panels) {
         if (this.DOMReferences && this.DOMReferences.root) {
             this.DOMReferences.root.remove();
         }
@@ -76,11 +70,11 @@ class Panel {
             this.position.y = mouseY - this.dragOffset.y
             this.DOMReferences.root.style('top', `${convertPxX(constrain(this.position.y, convertVwX(2), windowHeight - convertVwX(this.dimensions.y)))}vw`);
             this.DOMReferences.root.style('left', `${convertPxX(constrain(this.position.x, 0, windowWidth - convertVwX(this.dimensions.x)))}vw`);
-            const snapX = Math.round(this.position.x / this.snappingInfo.background.spacing) * this.snappingInfo.background.spacing;
-            const snapY = Math.round(this.position.y / this.snappingInfo.background.spacing) * this.snappingInfo.background.spacing;
-            this.DOMReferences.shadow.style('top', `${convertPxX(constrain(snapY, convertVwX(2), windowHeight - convertVwX(this.dimensions.y)))}vw`);
-            this.DOMReferences.shadow.style('left', `${convertPxX(constrain(snapX, 0, windowWidth - convertVwX(this.dimensions.x)))}vw`);
         }
-        
+        if(mouseX > this.position.x && mouseX < this.position.x + convertVwX(1.5) && mouseY > this.position.y && mouseY < this.position.y + convertVwX(1.5)) {
+            this.DOMReferences.root.style("box-shadow", "var(--panel-close-outline)");
+        } else {
+            this.DOMReferences.root.style("box-shadow", "none");
+        }
     }
 }
