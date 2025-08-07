@@ -36,7 +36,7 @@ function setup() {
 
   ContextMenu.init();
   EventHandler.setup();
-  SCENE = new PanelScene("Test Scene", new DotGridBackground(), true)
+  SCENE = new SidePaneScene("Test Scene", new DotGridBackground(), true)
 }
 
 function draw() {
