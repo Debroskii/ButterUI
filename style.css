@@ -2,8 +2,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Limelight&display=swap');
 
 :root {
-  --outline: var(--border-width) solid var(--border-color) !important;
-  --panel-close-outline: inset 0 0 0vw var(--border-width) var(--negative-color) !important;
+  --outline: var(--border-width) solid var(--border-color);
+  --panel-close-outline: inset 0 0 0vw var(--border-width) var(--negative-color);
   --font: monospace, sans-serif;
   --heading-font: monospace, sans-serif;
 }
@@ -71,6 +71,7 @@ canvas {
   background: none;
   border: none;
   user-select: none;
+  transition: transform 0.2s ease-out;
 }
 
 .button-icon {
@@ -269,6 +270,7 @@ canvas {
   font-family: var(--heading-font);
   font-size: 1vw;
   font-weight: 600;
+  transition: opacity 0.2s ease-in-out;
 }
 
 .title-bar .icon-button {
@@ -377,4 +379,15 @@ canvas {
 .preferences-button:hover {
   background: var(--text-color);
   color: var(--background);
+}
+
+.sidebar {
+  position: absolute;
+  top: 2vw;
+  left: -0.05vw;
+  width: 20vw;
+  height: 55.25vw;
+  border: var(--outline);
+  backdrop-filter: var(--backdrop-blur);
+  transition: width 0.2s ease-out;
 }
