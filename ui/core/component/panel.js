@@ -1,5 +1,5 @@
 class Panel {
-    constructor(position, dimensions = createVector(15, 15), title = "Untitled", content = createDiv('').addClass('panel-content')) {
+    constructor(position, dimensions = createVector(15, 15), title = "Untitled", content = createDiv('').addClass('panel-content'), locked = false) {
         this.id = crypto.randomUUID();
         this.position = position;
         this.dimensions = dimensions;
@@ -10,6 +10,7 @@ class Panel {
         this.title = title;
         this.DOMReferences = this.constructDOM(this);
         this.snappingInfo = {snapping: false, background: null};
+        this.locked = locked;
     }
 
     constructDOM() {
@@ -27,7 +28,7 @@ class Panel {
         dom.root.child(dom.titleBar);
         dom.root.child(dom.content);
 
-        dom.titleBar.mousePressed(() => {this.dragging = true; this.dragOffset = createVector(mouseX - this.position.x, winMouseY - this.position.y);});
+        dom.titleBar.mousePressed(() => {if(this.locked) return; this.dragging = true; this.dragOffset = createVector(mouseX - this.position.x, winMouseY - this.position.y);});
         dom.root.mouseReleased(() => {
             this.dragging = false;
             if(this.snappingInfo.snapping) {
@@ -76,5 +77,17 @@ class Panel {
         } else {
             this.DOMReferences.root.style("box-shadow", "none");
         }
+    }
+
+    clampLower(x, y) {
+        if (this.position.x < convertVwX(x)) {
+            this.position.x = convertVwX(x);
+            this.DOMReferences.root.style('left', `${x}vw`);
+        }
+        if (this.position.y < convertVwX(y)) {
+            this.position.y = convertVwX(x);
+            this.DOMReferences.root.style('top', `${y}vw`);
+        }
+        return this;
     }
 }
