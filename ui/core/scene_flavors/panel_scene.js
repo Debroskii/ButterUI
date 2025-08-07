@@ -15,7 +15,7 @@ class PanelScene extends CoreScene {
     }
 
     update(dt) {
-        this.panels.forEach(panel => panel.update(dt, {snapping: this.snapping, background: this.background}));
+        this.panels.forEach(panel => panel.update(dt));
         this.populatePanelMap();
     }
 
@@ -67,10 +67,10 @@ class PanelScene extends CoreScene {
     showPanelMap() {
         for(let x = 0; x < this.panelMap.length; x++) {
             for(let y = 0; y < this.panelMap[x].length; y++) {
-                if(this.panelMap[x][y]) {
-                    fill(255, 0, 0, 100);
-                    rect(x * this.background.spacing, y * this.background.spacing, this.background.spacing, this.background.spacing);
-                }
+                    if(this.panelMap[x][y]) fill(255, 0, 0, 255);
+                    else fill(0, 255, 0, 255);
+                    // rect(x * this.background.spacing, y * this.background.spacing, this.background.spacing, this.background.spacing);
+                    rect(100, 100, 100, 100);
             }
         }
     }
