@@ -1,8 +1,10 @@
 class SidePaneScene extends PanelScene {
     constructor(title = "ButterUI Panels", background = null, snapping = false, content = createDiv("").addClass("sidebar-content")) {
-        super(title, background, snapping)
-        this.content = content
+        super(title, background, snapping);
+        this.content = content;
         this.sidebarExpanded = true;
+        this.killExistingDOM();
+        this.DOMReferences = this.constructDOM();
     }
 
     constructDOM() {
@@ -11,14 +13,21 @@ class SidePaneScene extends PanelScene {
         let titlebar = create_TITLEBAR("Sidebar", null, {icon: ButtonIcon.ARROW_BACK, action: () => {
             this.collapse()
         }}).parent(sidebar)
-        sidebar.child(this.content)
+        if(this.content) this.content.parent(sidebar)
         existingDom.sidebar = sidebar
         return existingDom;
+    }
+
+    killExistingDOM() {
+        this.DOMReferences.bar.remove();
+        this.DOMReferences.title.remove();
+        this.DOMReferences.sidebar?.remove();
     }
 
     collapse() {
         this.DOMReferences.sidebar.style("width", "0vw")
         this.DOMReferences.sidebar.child()[0].children[1].style = "display: none;"
+        this.DOMReferences.sidebar.child()[1].style = "display: none;"
         this.DOMReferences.sidebar.child()[0].children[2].style = "transform: rotate(180deg);"
         this.DOMReferences.sidebar.child()[0].children[2].addEventListener("mousedown", e => {
             this.expand()
@@ -34,11 +43,8 @@ class SidePaneScene extends PanelScene {
             this.collapse()
         })
 
-        for(let panel of this.panels) {
-            this.panelMap
-        }
-
         this.sidebarExpanded = true;
+        this.DOMReferences.sidebar.child()[1].style = "display: block;"
     }
 
     populatePanelMap() {
