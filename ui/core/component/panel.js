@@ -1,8 +1,8 @@
 class Panel {
-    constructor(position, dimensions = createVector(15, 15), title = "Untitled", content = createDiv('').addClass('panel-content'), locked = false) {
+    constructor(position, dimensions = null, title = "Untitled", content = createDiv('').addClass('panel-content'), locked = false) {
         this.id = crypto.randomUUID();
         this.position = position;
-        this.dimensions = dimensions;
+        this.dimensions = dimensions || createVector(convertPxX(200), convertPxX(400));
         this.dragging = false;
         this.dragOffset = createVector(0, 0);
         this.visible = true;
