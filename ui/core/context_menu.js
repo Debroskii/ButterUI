@@ -88,7 +88,7 @@ function determineContext() {
 const DefaultContext = Object.freeze([]);
 const PanelSceneContext = Object.freeze([
     new ContextMenuItem("New Panel", () => {
-        SCENE.addPanel(new Panel(SCENE.findNextPosition(), createVector(convertPxX(200), convertPxX(500)), "Test Registry Panel", reg.constructContent()));
+        SCENE.addPanel(new Panel(SCENE.findNextPosition(), null, "Test Registry Panel", reg.constructContent()));
         SCENE.smartOrganize();
     }),
     new ContextMenuItem("Open Popup", () => {
