@@ -12,7 +12,7 @@ class PopupPane {
         root.style('width', `${this.size.x}vw`);
         root.style('height', `${this.size.y}vw`);
 
-        const titleBar = create_TITLEBAR(this.title, additionalArgs.leading || null, additionalArgs.trailing || null);
+        const titleBar = create_TITLEBAR(this.title, additionalArgs.leading || {icon: ButtonIcon.CLOSE, action: () => this.close()}, additionalArgs.trailing || null);
         titleBar.parent(root);
         root.parent(rootFilter);
 
