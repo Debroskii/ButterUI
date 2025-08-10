@@ -118,7 +118,7 @@ function create_SELECT_AND_LABEL(regEntry) {
     const select = createSelect().addClass('select').id(`${regEntry.key}-select`);
     if(!regEntry.editable) select.attribute("disabled", "null");
     regEntry.arguments.options.forEach(option => {
-        select.option(option.value, option.label);
+        select.option(option, option);
     });
     select.value(regEntry.value);
     document.getElementById(`${regEntry.key}-select`).addEventListener("change", (e) => { regEntry.value = e.target.value; })
@@ -150,23 +150,12 @@ function create_DATE_AND_LABEL(regEntry) {
     return container;
 }
 
-function create_DATETIME_AND_LABEL(regEntry) {
-    const label = createSpan(regEntry.label).addClass('value-label').id(`${regEntry.key}-label`);
-    const datetimeInput = createInput(regEntry.value, 'datetime-local').addClass('datetime-input').id(`${regEntry.key}-input`);
-    if(!regEntry.editable) datetimeInput.attribute("disabled", "null");
-    document.getElementById(`${regEntry.key}-input`).addEventListener("change", (e) => { regEntry.value = e.target.value; })
-    const container = createDiv('').addClass('entry-container').id(`${regEntry.key}-container`);
-    label.parent(container);
-    datetimeInput.parent(container);
-    return container;
-}
-
 function create_FILE_AND_LABEL(regEntry) {
     const label = createSpan(regEntry.label).addClass('value-label').id(`${regEntry.key}-label`);
     const fileInput = createFileInput().addClass('file-input').id(`${regEntry.key}-input`);
     if(!regEntry.editable) fileInput.attribute("disabled", "null");
     document.getElementById(`${regEntry.key}-input`).addEventListener("change", (e) => { regEntry.value = e.target.files; })
-    const container = createDiv('').addClass('entry-container').id(`${regEntry.key}-container`);
+    const container = createDiv('').addClass('entry-container').addClass('file-container').id(`${regEntry.key}-container`);
     label.parent(container);
     fileInput.parent(container);
     return container;
