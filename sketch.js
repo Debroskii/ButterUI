@@ -33,10 +33,15 @@ function setup() {
     .withTextField("test3", "placeholder", "Test Text Field", true)
     .withNumberField('test4', 0, "Test Number Field", true)
     .withColor("test5", color(255, 0, 0), "Test Color Picker", true)
+    .withSelect("test6", "h", "Test Select", true, ["a", "b", "c", "d", "h"])
+    .withDate("test7", new Date(), "Test Date", true)
+    .withTime("test8", new Date(), "Test Time", true)
+    .withFile("test9", "", "Test File", true)
 
   ContextMenu.init();
   EventHandler.setup();
-  SCENE = new SidePaneScene("Test Scene", new DotGridBackground(), true)
+  setupDemo();
+  SCENE = new SidePaneScene("Test Scene", new DotGridBackground(), true, SIDEBAR_CONTENT)
 }
 
 function draw() {
