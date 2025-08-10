@@ -74,12 +74,6 @@ class Registry extends RegistryEntry {
         return this;
     }
 
-    withDateTime(key, value, label = "", editable = true) {
-        const entry = new RegistryEntry(key, value, label, RegistryEntryElementType.DATETIME, editable);
-        this.addEntry(entry);
-        return this;
-    }
-
     withFile(key, value, label = "", editable = true) {
         const entry = new RegistryEntry(key, value, label, RegistryEntryElementType.FILE, editable);
         this.addEntry(entry);
@@ -160,8 +154,6 @@ class RegistryContentFactory {
                 return create_DATE_AND_LABEL(regEntry);
             case RegistryEntryElementType.TIME:
                 return create_TIME_AND_LABEL(regEntry);
-            case RegistryEntryElementType.DATETIME:
-                return create_DATETIME_AND_LABEL(regEntry);
             case RegistryEntryElementType.FILE:
                 return create_FILE_AND_LABEL(regEntry);
             default:
@@ -190,6 +182,5 @@ const RegistryEntryElementType = Object.freeze({
     COLOR: 'color',
     DATE: 'date',
     TIME: 'time',
-    DATETIME: 'datetime',
     FILE: 'file'
 })
