@@ -1,5 +1,5 @@
 class DotGridBackground extends Background {
-    constructor(mainColor = color(0), secondaryColor = color(255, 30), dotRadius = 1, spacing = 20) {
+    constructor(mainColor = AppTheme.getTheme().colors.background, secondaryColor = AppTheme.getTheme().colors.secondaryTextColor, dotRadius = 1, spacing = 20) {
         super();
         this.mainColor = mainColor;
         this.secondaryColor = secondaryColor;

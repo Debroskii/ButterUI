@@ -1,11 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Limelight&display=swap');
 
 :root {
   --outline: var(--border-width) solid var(--border-color);
   --panel-close-outline: inset 0 0 0vw var(--border-width) var(--negative-color);
-  --font: monospace, sans-serif;
-  --heading-font: monospace, sans-serif;
+  --font: "Roboto", monospace, sans-serif;
+  --heading-font: "Roboto", monospace, sans-serif;
 }
 
 html, body {
@@ -115,6 +116,7 @@ canvas {
   display: flex;
   flex-direction: column;
   border-radius: var(--border-radius);
+  background: var(--surface-color);
   border: var(--outline);
   color: var(--text-color);
   font-size: 0.6vw;
@@ -306,6 +308,7 @@ canvas {
   width: 100vw;
   height: 100vh;
   backdrop-filter: var(--backdrop-blur);
+  background: var(--surface-color);
   position: absolute !important;
   z-index: 1;
   transition: opacity 0.3s ease-in-out;
@@ -454,7 +457,12 @@ canvas {
   background: transparent;
 }
 
-/* DEMO */
+
+
+/******************************* DEMO *******************************/
+
+
+
 .sidebar-demo-heading {
   color: var(--primary-color);
   font-weight: 900;
@@ -494,11 +502,14 @@ canvas {
 
 .sidebar-demo-registry-heading {
   text-align: center;
-  font-size: 0.9vw;
+  font-size: 0.8vw;
+  font-weight: 600;
+  padding: 0 0.5vw 0 0.5vw;
 }
 
 .sidebar-demo-registry-container {
   background: var(--primary-color);
+  color: var(--background-color);
   padding-bottom: 0.1vw;
   padding-top: 0.1vw;
   border-radius: var(--border-radius);
@@ -546,7 +557,7 @@ canvas {
   font-size: 0.8vw;
   border: var(--outline);
   background: transparent;
-  color: var(--text-color);
+  color: var(--background-color);
   margin-bottom: 0.5vw;
   cursor: pointer;
   border-radius: var(--border-radius);
@@ -554,6 +565,6 @@ canvas {
 }
 
 .sidebar-demo-registry-popout-button:hover {
-  background: var(--text-color);
+  background: var(--background-color);
   color: var(--primary-color);
 }

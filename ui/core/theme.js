@@ -1,13 +1,13 @@
 class Theme {
     constructor() {
         this.colors = { 
-            primary: '#6200ea',
-            secondary: '#03dac6',
-            text: '#000000',
-            background: '#ffffff',
-            surface: '#f5f5f5',
+            primary: '#D52941',
+            secondary: '#990D35',
+            text: '#1B2021',
+            background: '#FFF8E8',
+            surface: "#FFF8E81E",
             negative: '#ff353c',
-            borderColor: '#e0e0e0',
+            borderColor: '#1B2021',
             secondaryTextColor: '#757575',
             positiveColor: '#ffffff'
         };

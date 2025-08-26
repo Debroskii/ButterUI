@@ -3,8 +3,20 @@ const BACKGROUND_COLOR = '#000000';
 
 let SIDEBAR_CONTENT
 let EXAMPLE_REGISTRY
+let THEME;
 
 function setupDemo() {
+    THEME = new Theme()
+        // .backgroundColor(color("#2E1F27"))
+        // .textColor(color("#fff"))
+        // .secondaryTextColor(color(36, 24, 1))
+        // .surfaceColor(color(0, 30))
+        // .primaryColor(color("#E07A5F"))
+        // .secondaryColor(color("#F4C95D"))
+        // .borderColor(color(255, 105))
+        // .borderWidth(0.05)
+        // .positiveColor(color(55, 205, 105))
+
     EXAMPLE_REGISTRY = new Registry("Example Registry")
         .withCheckbox("example-checkbox", true, "Example Checkbox", true)
         .withNumberField("example-number", 42, "Example Number Field", true)

@@ -11,20 +11,11 @@ function windowResized() {
 function setup() {
   frameRate(TARGET_FRAME_RATE);
   createCanvas(windowWidth, windowHeight);
+  setupDemo();
 
   Preferences.getInstance().withCheckbox("test-checkbox", true, "Test Checkbox", true)
 
-  AppTheme.setTheme(new Theme()
-    .backgroundColor(color(0))
-    .textColor(color(255))
-    .secondaryTextColor(color(205))
-    .surfaceColor(color(255, 30))
-    .primaryColor(color(255, 55, 55))
-    .borderColor(color(255, 105))
-    .borderWidth(0.05)
-    .positiveColor(color(55, 205, 105))
-  )
-
+  AppTheme.setTheme(THEME)
   AppTheme.setup();
 
   reg = new Registry("Test Registry")
@@ -40,8 +31,7 @@ function setup() {
 
   ContextMenu.init();
   EventHandler.setup();
-  setupDemo();
-  SCENE = new SidePaneScene("Test Scene", new DotGridBackground(), true, SIDEBAR_CONTENT)
+  SCENE = new SinglePaneScene(createVector(50, 20), "Butter UI", createImg('/assets/butter.png').style("height", "18vw"), new SolidColorBackground(color(246, 227, 178)))
 }
 
 function draw() {
